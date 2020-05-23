@@ -7,7 +7,7 @@ def merge_videos(file_paths):
         f.write('file \'{}\' \n'.format(file_path))
     f.close()
 
-    :param file_paths: 합쳐야할 영상 경로 리스트
+    subprocess.run(['ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4'], shell=True, check=True)
     :return: 합쳐진 영상 경로
     """
     file_path = ''
