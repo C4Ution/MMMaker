@@ -11,7 +11,7 @@ def extract_audio(video_path):
     # Create random file name
     tf = tempfile.NamedTemporaryFile()
 
-    audio_path = os.getcwd() + tf.name[4:] + ".wav"
+    audio_path = os.getcwd() + "video_audio_manager_" + tf.name[4:] + ".wav"
 
     # Access video file
     video_clip = VideoFileClip(video_path)
