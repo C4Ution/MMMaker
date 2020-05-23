@@ -4,9 +4,9 @@ from pathlib import Path
 
 def merge_videos(file_paths):
 
-    f = open('mylist.txt', 'w')
-    for file_path in file_paths:
-        f.write('file \'{}\' \n'.format(file_path))
+    clip_list = [VideoFileClip(file_path) for file_path in file_paths]
+    final_clip = concatenate_videoclips(clip_list)
+    final_clip.write_videofile('output.mp4')
     f.close()
 
     subprocess.run(['ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4'], shell=True, check=True)
