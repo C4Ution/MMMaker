@@ -5,7 +5,69 @@ from pydub.playback import play
 
 def adjust_sounds(highlight_paths, silence_path, music):
 
-    return highlight_paths
+# 미레도레 미미미 레레레 미솔솔 미레도레 미미미 레레미레도
+EXAMPLE_MUSIC = [
+    {
+        'pitch': -5.0,  # 미
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -9.0,  # 도
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 1,
+        'is_silence': True,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 1,
+        'is_silence': False,
+    },
+]
 
 
 """
