@@ -1,4 +1,5 @@
-from moviepy.editor import *
+from moviepy.editor import VideoFileClip, AudioFileClip
+import moviepy.video.fx.all as vfx
 from misc import random_str
 
 
