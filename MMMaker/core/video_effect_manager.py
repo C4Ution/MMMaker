@@ -19,9 +19,19 @@ def _flip_y(video, idx):
     out.write_videofile('out{}.mp4'.format(idx))
 
 
+def _black_white(video, idx):
+    out = video.fx(vfx.blackwhite)
+    out.write_videofile('out{}.mp4'.format(idx))
+
+
+def _colorx(video, idx):
+    out = video.fx(vfx.colorx, factor=2)
+    out.write_videofile('out{}.mp4'.format(idx))
+
+
 def apply_effects(file_paths):
     effects = [
-        _stay, _flip_x, _flip_y,
+        _stay, _flip_x, _flip_y, _black_white, _colorx,
     ]
 
     new_file_paths = []
