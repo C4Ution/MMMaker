@@ -33,11 +33,19 @@ To install package
 ```
 
 ## Test
+#### Run Unit Test
 
 -------------------
 ```bash
     $ cd MMMaker
     $ python manage.py test
+```
+
+#### Run Code Style Test
+
+-------------------
+```bash
+    $ flake8 MMMaker
 ```
 
 ## Contribute
@@ -53,8 +61,12 @@ If you want to contribute to **Meme Maker**, be sure to review the [contribution
 
 We use GitHub issues for tracking requests and bugs.
 
+## Contributor
+
+
 ## License
 
 ------------------------
 MIT license
+
 
