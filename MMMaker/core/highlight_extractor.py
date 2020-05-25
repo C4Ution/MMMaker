@@ -1,6 +1,5 @@
-import wave
 import numpy as np
-from moviepy.editor import *
+from moviepy.editor import VideoFileClip
 # import matplotlib.pyplot as plt
 import scipy.io.wavfile as wave
 from scipy.fftpack import fft
@@ -30,10 +29,10 @@ def extract_highlights(file_paths):
     argmin_frequency = np.argmin(abs(fourier_transform_wave)) / normalize_time + 0.5
 
 
-    max_highlight = video_clip.subclip(argmax_frequency - (HIGHLIGHT_LENGTH / 2), argmax_frequency + (HIGHLIGHT_LENGTH / 2))
-    min_highlight = video_clip.subclip(argmin_frequency - (HIGHLIGHT_LENGTH / 2), argmin_frequency + (HIGHLIGHT_LENGTH / 2))
+    max_highlight = video_clip.subclip(argmax_frequency - (HIGHLIGHT_LENGTH/2), argmax_frequency + (HIGHLIGHT_LENGTH/2))
+    min_highlight = video_clip.subclip(argmin_frequency - (HIGHLIGHT_LENGTH/2), argmin_frequency + (HIGHLIGHT_LENGTH/2))
 
-#    max_highlight.write_videofile('/Users/hyeseongkim/Workspaces/Projects/MMMaker/MaxHighlight.mp4', codec='libx264', audio_codec='aac')
+#    max_highlight.write_videofile('MaxHighlight.mp4', codec='libx264', audio_codec='aac')
 #    min_highlight.write_videofile('MinHighlight.mp4', codec='libx264', audio_codec='aac')
     video_clip.close()
     return max_highlight, min_highlight
