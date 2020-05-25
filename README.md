@@ -61,7 +61,6 @@ If you want to contribute to **Meme Maker**, be sure to review the [contribution
 
 We use GitHub issues for tracking requests and bugs.
 
-## Contributor
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
