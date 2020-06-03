@@ -21,9 +21,12 @@ def extract_highlights(file_paths):
     audio_clip.write_audiofile(src_audio_file_name)
     source_wave = wave.read(src_audio_file_name)
 
-    stereo_channel_wave = source_wave[1].T[1]
-    normalize_wave = [(ele / 2 ** 8.) * 2 - 1 for ele in stereo_channel_wave]  # this is 8-bit track, now normalized on [-1,1)
-    fourier_transform_wave = fft(normalize_wave)  # calculate fourier transform (complex numbers list)
+    for file_path in file_paths:
+        video_clip = VideoFileClip(file_path)
+        audio_clip = video_clip.audio
+        src_audio_file_name = get_random_name('wav')
+        audio_clip.write_audiofile(src_audio_file_name)
+        source_wave = wave.read(src_audio_file_name)
 
     normalize_time = len(fourier_transform_wave) / video_clip.duration
 
