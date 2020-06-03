@@ -17,7 +17,7 @@ def extract_audio(video_path):
 
     # Extract audio file
     audio_clip = video_clip.audio
-    audio_clip.write_audiofile(audio_path, codec='libx264', audio_codec='aac')
+    audio_clip.write_audiofile(audio_path)
 
     return audio_path
 
