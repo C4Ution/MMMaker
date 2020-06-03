@@ -43,3 +43,4 @@ def overwrite_audio(video_path, audio_path):
     adjusted_video.write_videofile(video_path)
 
     return video_path
+
