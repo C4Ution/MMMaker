@@ -17,7 +17,7 @@ def extract_audio(video_path):
 
     # Extract audio file
     audio_clip = video_clip.audio
-    audio_clip.write_audiofile(audio_path)
+    audio_clip.write_audiofile(audio_path, codec='libx264', audio_codec='aac')
 
     return audio_path
 
@@ -40,7 +40,7 @@ def overwrite_audio(video_path, audio_path):
 
     # Overwrite video audio
     adjusted_video.audio = audio_clip
-    adjusted_video.write_videofile(video_path)
+    adjusted_video.write_videofile(video_path, codec='libx264', audio_codec='aac')
 
     return video_path
 

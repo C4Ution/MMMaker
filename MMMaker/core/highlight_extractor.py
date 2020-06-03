@@ -21,7 +21,7 @@ def extract_highlights(file_paths):
         video_clip = VideoFileClip(file_path)
         audio_clip = video_clip.audio
         src_audio_file_name = get_random_name('wav')
-        audio_clip.write_audiofile(src_audio_file_name)
+        audio_clip.write_audiofile(src_audio_file_name, codec='libx264', audio_codec='aac')
         source_wave = wave.read(src_audio_file_name)
 
         stereo_channel_wave = source_wave[1].T[1]
@@ -32,7 +32,6 @@ def extract_highlights(file_paths):
 
         argmax_frequency = np.argmax(fourier_transform_wave) / normalize_time + 0.5
         argmin_frequency = np.argmin(abs(fourier_transform_wave)) / normalize_time + 0.5
-
 
         max_highlights.append(video_clip.subclip(argmax_frequency - (HIGHLIGHT_LENGTH/2), argmax_frequency + (HIGHLIGHT_LENGTH/2)))
         min_highlights.append(video_clip.subclip(argmin_frequency - (HIGHLIGHT_LENGTH/2), argmin_frequency + (HIGHLIGHT_LENGTH/2)))
