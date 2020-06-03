@@ -40,7 +40,7 @@ def overwrite_audio(video_path, audio_path):
 
     # Overwrite video audio
     adjusted_video.audio = audio_clip
-    adjusted_video.write_videofile(video_path)
+    adjusted_video.write_videofile(video_path, codec='libx264', audio_codec='aac')
 
     return video_path
 
