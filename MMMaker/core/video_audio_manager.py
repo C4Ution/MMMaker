@@ -10,7 +10,7 @@ def extract_audio(video_path):
     """
 
     # Create random file name
-    audio_path = get_random_name() + '.wav'
+    audio_path = get_random_name('wav')
 
     # Access video file
     video_clip = VideoFileClip(video_path)
@@ -33,7 +33,7 @@ def overwrite_audio(video_path, audio_path):
     audio_clip = AudioFileClip(audio_path)
 
     # Create random file name
-    video_path = get_random_name() + '.mp4'
+    video_path = get_random_name('mp4')
 
     # Adjust video speed to sync with audio file
     adjusted_video = video_clip.fx(vfx.speedx, final_duration=audio_clip.duration)
