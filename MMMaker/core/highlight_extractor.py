@@ -33,10 +33,10 @@ def extract_highlights(file_paths):
         argmax_frequency = np.argmax(fourier_transform_wave) / normalize_time + 0.5
         argmin_frequency = np.argmin(abs(fourier_transform_wave)) / normalize_time + 0.5
 
-        max_highlights.append(get_random_name('mp4'))
-        min_highlights.append(get_random_name('mp4'))
+        max_highlight_path = max_highlights.append(get_random_name('mp4'))
+        min_highlight_path = min_highlights.append(get_random_name('mp4'))
 
-        video_clip.subclip(argmax_frequency - (HIGHLIGHT_LENGTH/2), argmax_frequency + (HIGHLIGHT_LENGTH/2)).write_videofile(max_highlights[-1], codec='libx264', audio_codec='aac')
-        video_clip.subclip(argmin_frequency - (HIGHLIGHT_LENGTH/2), argmin_frequency + (HIGHLIGHT_LENGTH/2)).write_videofile(min_highlights[-1], codec='libx264', audio_codec='aac')
+        video_clip.subclip(argmax_frequency - (HIGHLIGHT_LENGTH/2), argmax_frequency + (HIGHLIGHT_LENGTH/2)).write_videofile(max_highlight_path, codec='libx264', audio_codec='aac')
+        video_clip.subclip(argmin_frequency - (HIGHLIGHT_LENGTH/2), argmin_frequency + (HIGHLIGHT_LENGTH/2)).write_videofile(min_highlight_path, codec='libx264', audio_codec='aac')
         video_clip.close()
     return max_highlights, min_highlights
