@@ -42,7 +42,7 @@ def adjust_sounds(highlight_paths, silence_paths, music):
     for note in music:
         video = random.choice(silence_paths) if note['is_silence'] else random.choice(highlight_paths)
         wav = edit_sounds(extract_audio(video), note['pitch'], note['length'])
-        ret.append(overwrite_audio(video, wav))
+        ret.append(overwrite_audio(video, wav, note['is_silence']))
 
     return ret
 
