@@ -12,62 +12,147 @@ HIGHLIGHT_LENGTH = 0.2
 EXAMPLE_MUSIC = [
     {
         'pitch': -5.0,  # 미
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
         'is_silence': False,
     },
     {
         'pitch': -7.0,  # 레
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
         'is_silence': False,
     },
     {
         'pitch': -9.0,  # 도
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
         'is_silence': False,
     },
     {
         'pitch': -7.0,  # 레
-        'length': HIGHLIGHT_LENGTH,
-        'is_silence': False,
-    },
-    # {
-    #     'pitch': 0.0,  # 공백
-    #     'length': HIGHLIGHT_LENGTH,
-    #     'is_silence': False,
-    # },
-    {
-        'pitch': -5.0,  # 미
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
         'is_silence': False,
     },
     {
         'pitch': -5.0,  # 미
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
         'is_silence': False,
     },
     {
         'pitch': -5.0,  # 미
-        'length': HIGHLIGHT_LENGTH,
-        'is_silence': False,
-    },
-    # {
-    #     'pitch': 0.0,  # 공백
-    #     'length': HIGHLIGHT_LENGTH,
-    #     'is_silence': True,
-    # },
-    {
-        'pitch': -7.0,  # 레
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
         'is_silence': False,
     },
     {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.15,
+        'is_silence': True,
+    },
+    {
         'pitch': -7.0,  # 레
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
         'is_silence': False,
     },
     {
         'pitch': -7.0,  # 레
-        'length': HIGHLIGHT_LENGTH,
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.15,
+        'is_silence': True,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -2.0,  # 솔
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -2.0,  # 솔
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.15,
+        'is_silence': True,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -9.0,  # 도
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.15,
+        'is_silence': True,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -7.0,  # 레
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -9.0,  # 도
+        'length': 0.1,
         'is_silence': False,
     },
 ]
