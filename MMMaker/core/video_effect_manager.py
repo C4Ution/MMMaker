@@ -8,21 +8,21 @@ from misc import WORKING_DIR, get_random_name
 
 def _stay(video):
     file_path = get_random_name('mp4')
-    video.write_videofile(file_path)
+    video.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 
 def _flip_x(video):
     out = video.fx(vfx.mirror_x)
     file_path = get_random_name('mp4')
-    out.write_videofile(file_path)
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 
 def _flip_y(video):
     out = video.fx(vfx.mirror_y)
     file_path = get_random_name('mp4')
-    out.write_videofile(file_path)
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 
@@ -36,7 +36,7 @@ def _black_white(video):
 def _colorx(video):
     out = video.fx(vfx.colorx, factor=2)
     file_path = get_random_name('mp4')
-    out.write_videofile(file_path)
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 
@@ -44,28 +44,28 @@ def _mask_color(video):
     out = video.fx(vfx.mask_color, color=[255, 0, 0], thr=100, s=5)
     # out = video.on_color(color=(255, 255, 0))
     file_path = get_random_name('mp4')
-    out.write_videofile(file_path)
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 
 def _rotate_90(video):
     out = video.fx(vfx.rotate, angle=90)
     file_path = get_random_name('mp4')
-    out.write_videofile(file_path)
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 
 def _rotate_270(video):
     out = video.fx(vfx.rotate, angle=270)
     file_path = get_random_name('mp4')
-    out.write_videofile(file_path)
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 
 def _invert_colors(video):
     out = video.fx(vfx.invert_colors)
     file_path = get_random_name('mp4')
-    out.write_videofile(file_path)
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
 

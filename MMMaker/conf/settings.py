@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'boto3',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
