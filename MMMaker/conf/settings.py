@@ -25,7 +25,7 @@ SECRET_KEY = '09k*&9q6lqu$@yamfhtg9t&w)n_)6y%i6d%vjw_59=5rsf5e@s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'storages',
     'boto3',
     'django_extensions',
-    'app.memes'
+    'app.memes',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +136,7 @@ if DEBUG:
 
     MEDIA_URL = '/media/'
 else:
-    CUSTOM_DOMAIN = 'https://mmmaker.s3.ap-northeast-2.amazonaws.com/'
+    CUSTOM_DOMAIN = 'https://mmmaker.s3.ap-northeast-2.amazonaws.com/{}'
     AWS_REGION = 'ap-northeast-2'
     AWS_S3_REGION_NAME = 'ap-northeast-2'
     AWS_STORAGE_BUCKET_NAME = '<BUCKET_NAME>'
