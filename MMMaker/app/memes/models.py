@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Task(models.Model):
-    STATUS_QUEUED, STATUS_STARTED, STATUS_DOWNLOAD, STATUS_FAILED = 10, 20, 30, 0
+    STATUS_QUEUED, STATUS_STARTED, STATUS_DOWNLOAD, STATUS_FAILED = 20, 20, 30, 0
     STATUS_CHOICES = (
         (STATUS_QUEUED, '서버 작업 대기중'),
         (STATUS_STARTED, '서버 작업 시작'),
@@ -19,4 +19,4 @@ class Task(models.Model):
 
 class TaskResource(models.Model):
     task = models.ForeignKey('memes.Task', on_delete=models.CASCADE, related_name='task_resources')
-    url = models.URLField()
+    access_key = models.CharField(max_length=100)
