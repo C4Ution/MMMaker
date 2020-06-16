@@ -89,3 +89,5 @@ local_settings.py
 db.sqlite3
 
 .idea
+MMMaker/conf/prod.py
+temp_files
