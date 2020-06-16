@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '09k*&9q6lqu$@yamfhtg9t&w)n_)6y%i6d%vjw_59=5rsf5e@s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
+    'boto3',
     'django_extensions',
 ]
 
@@ -118,8 +120,100 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, '../static/')
+
+
+if DEBUG:
+    STATIC_URL = '/static/'
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+    MEDIA_URL = '/media/'
+else:
+    CUSTOM_DOMAIN = 'https://mmmaker.s3.ap-northeast-2.amazonaws.com/'
+    AWS_REGION = 'ap-northeast-2'
+    AWS_S3_REGION_NAME = 'ap-northeast-2'
+    AWS_STORAGE_BUCKET_NAME = '<BUCKET_NAME>'
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_HOST = 's3.{}.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
+    AWS_ACCESS_KEY_ID = '<AWS_ACCESS_KEY_ID>'
+    AWS_SECRET_ACCESS_KEY = '<AWS_SECRET_ACCESS_KEY>'
+    AWS_S3_CUSTOM_DOMAIN = '{}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400'
+    }
+    AWS_LOCATION = 'static'
+
+    STATIC_URL = "http://{}/".format(AWS_S3_CUSTOM_DOMAIN)
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_LOCATION = 'static'
+
+    MEDIA_URL = 'http://{}/'.format(AWS_S3_CUSTOM_DOMAIN)
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIAFILES_LOCATION = 'media'
+
+    AWS_DEFAULT_ACL = None
+    S3DIRECT_DESTINATIONS = {
+        'example_destination': {
+            # "key" [required] The location to upload file
+            #       1. String: folder path to upload to
+            #       2. Function: generate folder path + filename using a function
+            'key': 'uploads/images',
+
+            # "auth" [optional] Limit to specfic Django users
+            #        Function: ACL function
+            'auth': lambda u: u.is_staff,
+
+            # "allowed" [optional] Limit to specific mime types
+            #           List: list of mime types
+            'allowed': ['image/jpeg', 'image/png', 'video/mp4'],
+
+            # "bucket" [optional] Bucket if different from AWS_STORAGE_BUCKET_NAME
+            #          String: bucket name
+            'bucket': '<BUCKET_NAME>',
+
+            # "endpoint" [optional] Endpoint if different from AWS_S3_ENDPOINT_URL
+            #            String: endpoint URL
+            'endpoint': 'http://mmmaker.s3-website.ap-northeast-2.amazonaws.com',
+
+            # "region" [optional] Region if different from AWS_S3_REGION_NAME
+            #          String: region name
+            'region': 'ap-northeast-2',  # Default is 'AWS_S3_REGION_NAME'
+
+            # "acl" [optional] Custom ACL for object, default is 'public-read'
+            #       String: ACL
+            'acl': 'private',
+
+            # "cache_control" [optional] Custom cache control header
+            #                 String: header
+            'cache_control': 'max-age=2592000',
+
+            # "content_disposition" [optional] Custom content disposition header
+            #                       String: header
+            'content_disposition': lambda x: 'attachment; filename="{}"'.format(x),
+
+            # "content_length_range" [optional] Limit file size
+            #                        Tuple: (from, to) in bytes
+            'content_length_range': (5000, 20000000),
+
+            # "server_side_encryption" [optional] Use serverside encryption
+            #                          String: encrytion standard
+            'server_side_encryption': 'AES256',
+
+            # "allow_existence_optimization" [optional] Checks to see if file already exists,
+            #                                returns the URL to the object if so (no upload)
+            #                                Boolean: True, False
+            'allow_existence_optimization': False,
+        },
+        'example_destination_two': {
+            'key': lambda filename, args: args + '/' + filename,
+            'key_args': 'uploads/images',
+        }
+    }
+
+APPEND_SLASH = True
