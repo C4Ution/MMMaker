@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'storages',
     'boto3',
     'django_extensions',
+    'app.memes'
 ]
 
 MIDDLEWARE = [
