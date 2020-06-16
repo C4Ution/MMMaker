@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Task(models.Model):
@@ -27,4 +28,8 @@ class Task(models.Model):
 
 class TaskResource(models.Model):
     task = models.ForeignKey('memes.Task', on_delete=models.CASCADE, related_name='task_resources')
-    url = models.URLField()
+    access_key = models.CharField(max_length=100)
+
+    @property
+    def file_url(self):
+        return settings.CUSTOM_DOMAIN.format(self.access_key)
