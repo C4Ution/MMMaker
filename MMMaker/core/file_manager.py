@@ -1,5 +1,5 @@
 from misc import get_random_name, random_str
-from conf import settings
+from django.conf import settings
 import requests
 from tenacity import retry, stop_after_attempt
 import boto3
@@ -43,5 +43,5 @@ def uploader(file_path):
     bucket.put_object(Key=key_name, Body=contents)
     os.remove(file_path)
 
-    url = settings.CUSTOM_DOMAIN + key_name
+    url = settings.CUSTOM_DOMAIN.format(key_name)
     return url
