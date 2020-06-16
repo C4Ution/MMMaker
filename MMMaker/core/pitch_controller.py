@@ -69,6 +69,7 @@ EXAMPLE_MUSIC = [
     },
 ]
 
+
 def adjust_sounds(highlight_paths, silence_path, music):
     """
     :param highlight_paths: 하이라이트 영상 경로 리스트
