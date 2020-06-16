@@ -68,10 +68,16 @@ def _invert_colors(video):
     out.write_videofile(file_path, codec='libx264', audio_codec='aac')
     return file_path
 
+def _painting(video):
+    out = video.fx(vfx.painting, saturation = 1.6, black = 0.006)
+    file_path = get_random_name('mp4')
+    out.write_videofile(file_path, codec='libx264', audio_codec='aac')
+    return file_path
+
 
 def apply_effects(file_paths):
     effects = [
-        _stay, _flip_x, _flip_y, _black_white, _colorx, _mask_color, _rotate_90, _rotate_270, _invert_colors,
+        _stay, _flip_x, _flip_y, _black_white, _colorx, _mask_color, _rotate_90, _rotate_270, _invert_colors, _painting
     ]
 
     new_file_paths = []
