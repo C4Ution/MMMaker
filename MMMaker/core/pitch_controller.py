@@ -1,3 +1,4 @@
+from core.music_manager import get_random_music
 from core.video_audio_manager import extract_audio, overwrite_audio
 import random
 
@@ -7,155 +8,6 @@ from librosa.output import write_wav
 from librosa.effects import pitch_shift, time_stretch
 
 HIGHLIGHT_LENGTH = 0.2
-
-# 미레도레 미미미 레레레 미솔솔 미레도레 미미미 레레미레도
-EXAMPLE_MUSIC = [
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -9.0,  # 도
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': 0.0,  # 공백
-        'length': 0.15,
-        'is_silence': True,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': 0.0,  # 공백
-        'length': 0.15,
-        'is_silence': True,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -2.0,  # 솔
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -2.0,  # 솔
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': 0.0,  # 공백
-        'length': 0.15,
-        'is_silence': True,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -9.0,  # 도
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': 0.0,  # 공백
-        'length': 0.15,
-        'is_silence': True,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -5.0,  # 미
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -7.0,  # 레
-        'length': 0.1,
-        'is_silence': False,
-    },
-    {
-        'pitch': -9.0,  # 도
-        'length': 0.1,
-        'is_silence': False,
-    },
-]
 
 
 def adjust_sounds(highlight_paths, silence_paths, music):
@@ -205,7 +57,7 @@ def edit_sounds(path, pitch, length):
 
 
 if __name__ == '__main__':
-    adjust_sounds(['MaxHighlight.mp4'], ['MinHighlight.mp4'], EXAMPLE_MUSIC)
+    adjust_sounds(['MaxHighlight.mp4'], ['MinHighlight.mp4'], get_random_music())
     pass
     # import librosa
     # from librosa.output import write_wav
