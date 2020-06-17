@@ -345,7 +345,8 @@ BABY_SHARK_MUSIC = [
 
 def get_random_music():
     musics = [
-        AIRPLANE_MUSIC, BABY_SHARK_MUSIC,
+        AIRPLANE_MUSIC,
+        BABY_SHARK_MUSIC,
     ]
 
     music_num = random.randint(0, len(musics)-1)
