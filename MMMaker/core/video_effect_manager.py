@@ -1,10 +1,12 @@
 import random
 from pathlib import Path
+from vidpy import config, Clip, Composition
 
 import moviepy.video.fx.all as vfx
 from moviepy.editor import VideoFileClip
 from misc import WORKING_DIR, get_random_name
 
+config.MELT_BINARY = '/usr/bin/melt'
 
 def _stay(video):
     file_path = get_random_name('mp4')
@@ -75,9 +77,16 @@ def _painting(video):
     return file_path
 
 
+def _video_zoompan(file_path):
+    video = Clip(file_path)
+    video.zoompan([0, 0, '100%', '100%'], [100, 100, '50%', '50%'], start=0, end=5)
+    file_path = get_random_name('mp4')
+    video.save(file_path)
+    return
 def apply_effects(file_paths):
     effects = [
         _stay, _flip_x, _flip_y, _black_white, _colorx, _mask_color, _rotate_90, _rotate_270, _invert_colors, _painting
+        _video_zoompan,
     ]
 
     new_file_paths = []
