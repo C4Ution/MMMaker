@@ -1,21 +1,17 @@
 from __future__ import absolute_import
 
-from celery import Celery
-
 from app.memes.models import Task
+from conf.celery import app
 from core.file_manager import downloader, uploader
-from core.pitch_controller import adjust_sounds
-from core.video_merger import merge_videos
 from core.highlight_extractor import extract_highlights
-from core.video_effect_manager import apply_effects
 from core.music_manager import get_random_music
-
-
-app = Celery('task')
+from core.pitch_controller import adjust_sounds
+from core.video_effect_manager import apply_effects
+from core.video_merger import merge_videos
 
 
 @app.task()
-def make_meme_task(pk):
+def make_meme(pk):
     meme = Task.objects.prefetch_related('task_resources').get(pk=pk)
     resources = meme.task_resources.all()
 
