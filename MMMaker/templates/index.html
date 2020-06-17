@@ -17,28 +17,21 @@
     <h1 class="logo" style="z-index: 2"><a href="/">MMMaker</a></h1>
     <p class="intro type-primary">Create a meme with your adorable pet, baby, etc!<br>It is very easy with <a href="/">MMMaker.</a></p>
     <section class="timeline">
-        {#        <article class="timeline-entry grid">#}
-        {#            <h2 class="timeline-co type-primary"><a href="https://apple.com">Apple</a> <span class="timeline-time">2014–Present</span></h2 class="timeline-co">#}
-        {#            <div class="timeline-description">#}
-        {#                <p>My current role uniquely balances form and function. I’ve designed prototypes for executive review, built custom tooling for designers, and engineered web and native applications across various platforms. Most of my work has launched as interactive web experiences on <a href="https://apple.com">apple.com</a>.</p>#}
-        {#                <p>I’ve also spearheaded collaborative efforts with designers while leading large teams of talented developers.</p>#}
-        {#            </div>#}
-        {#        </article>#}
         <article class="timeline-entry" style="display: block" id="statusSection">
-            <p style="font-size: 36px;font-weight: 600; margin: 40px 8% 40px 8%">It takes few minutes....</p>
+            <p style="font-size: 36px;font-weight: 600; margin: 40px 8% 40px 8%" id="loadingHeader">Could you wait a sec?</p>
             <div style="display: flex; justify-content: space-between;align-items: center; padding: 0 8% 0 8%">
                 <div></div>
                 <div style="width: 100%;">
                     <div class="loading-bar">
                         <div class="loading-progress"></div>
                     </div>
-                    <p style="text-align: center" id="loadingText">dsfdfsfs</p>
+                    <p style="text-align: center" id="loadingText">task waited</p>
                 </div>
                 <div style="height: 100%"></div>
             </div>
             <div style="text-align: center">
                 <a id="downloadBtn" class="btn">Download</a>
-                <a class="btn" href="/">retry</a>
+                <a id="retryBtn" class="btn" href="/">retry</a>
             </div>
         </article>
         <article class="timeline-entry" style="display: block" id="makeSection">
@@ -72,8 +65,8 @@
 <script>
     const bucketName = "mmmaker";
     const bucketRegion = "ap-northeast-2";
-    const accessKeyId = "AKIAIKOLOCYLUYMSMG4Q";
-    const secretAccessKey = "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";
+    const accessKeyId = "AKIA3KQA54WZT6R72IAY";
+    const secretAccessKey = "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";
     $dropZone = null;
     $fileInput = null;
     $progressBar = null;
@@ -93,10 +86,20 @@
                 url: "{% url 'check-task' pk='00000' %}".replace("00000", id),
                 success: function (data) {
                     $loadingText.html(data.msg);
+                    if(data.status === 0){
+                        error_occurred = true;
+                        $('#retryBtn').slideDown();
+                        $('#loadingHeader').html("Oops! error occurred");
+                        return;
+                    }
                     $progressBar.css('width', data.status + '%');
                     if(data.result_url){
                         is_completed = true;
                         resultUrl = data.result_url;
+                        $('#downloadBtn').attr('href', data.result_url);
+                        $('#downloadBtn').slideDown();
+                        $('#retryBtn').slideDown();
+                        $('#loadingHeader').html("It is done!");
                     }
                     setTimeout(function () {
                         checkStatus(id)
@@ -104,12 +107,17 @@
                 },
                 error: function () {
                     error_occurred = true;
+                    $('#retryBtn').slideDown();
+                    $('#loadingHeader').html("Oops! error occurred");
+
                 }
             });
         }
     }
     $(function () {
         $('#statusSection').hide();
+        $('#downloadBtn').hide();
+        $('#retryBtn').hide();
         AWS.config.update({
             region: bucketRegion,
             accessKeyId: accessKeyId,
@@ -157,11 +165,24 @@
 
             if(fileCount > 5){
                 $dropZoneMessage.html("You gotta select files less than 6!<br>Drop files or click!");
+                $fileInput[0].value = '';
                 return
             }
 
+            let fileSize = 0;
             for(let i = 0; i < fileCount; i++){
                 dropZoneMessage += files[i].name + "<br>";
+                if (files[i].name.split('.').pop() !== 'mp4'){
+                    $fileInput[0].value = '';
+                    $dropZoneMessage.html("Sorry, we can support mp4 files ;(<br>Drop files or click!");
+                    return
+                }
+                fileSize += files[i].size;
+            }
+            if(fileSize > 5242880){
+                $fileInput[0].value = '';
+                $dropZoneMessage.html("Sorry, please upload less than 5MB<br>Drop files or click!");
+                return
             }
             if(dropZoneMessage){
                 $dropZoneMessage.html(dropZoneMessage);
@@ -201,6 +222,9 @@
                     fileKeys.push(fileName);
                 }
                 if(error_occurred){
+                    error_occurred = true;
+                    $('#retryBtn').slideDown();
+                    $('#loadingHeader').html("Oops! error occurred");
                     return;
                 }
                 $.ajax({
@@ -218,6 +242,8 @@
                     },
                     error: function () {
                         error_occurred = true;
+                        $('#retryBtn').slideDown();
+                        $('#loadingHeader').html("Oops! error occurred");
                     }
                 })
             }, 1000);
