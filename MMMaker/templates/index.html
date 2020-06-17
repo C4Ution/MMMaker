@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>MMMaker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Danny Garcia, senior front end engineer and designer at Apple. Building nice things for good people." />
+    <meta name="author" content="Danny Garcia" />
+    <script>document.documentElement.classList.remove('no-js');</script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="canvas-container"></div>
+<main>
+    <h1 class="logo" style="z-index: 2"><a href="/">MMMaker</a></h1>
+    <p class="intro type-primary">Create a meme with your adorable pet, baby, etc!<br>It is very easy with <a href="/">MMMaker.</a></p>
+    <section class="timeline">
+{#        <article class="timeline-entry grid">#}
+{#            <h2 class="timeline-co type-primary"><a href="https://apple.com">Apple</a> <span class="timeline-time">2014–Present</span></h2 class="timeline-co">#}
+{#            <div class="timeline-description">#}
+{#                <p>My current role uniquely balances form and function. I’ve designed prototypes for executive review, built custom tooling for designers, and engineered web and native applications across various platforms. Most of my work has launched as interactive web experiences on <a href="https://apple.com">apple.com</a>.</p>#}
+{#                <p>I’ve also spearheaded collaborative efforts with designers while leading large teams of talented developers.</p>#}
+{#            </div>#}
+{#        </article>#}
+{#        <article class="timeline-entry" style="display: block">#}
+{#            <p style="font-size: 36px;font-weight: 600; margin: 0 8% 0 8%">It takes few minutes....</p>#}
+{#            <div style="display: flex; justify-content: space-between;align-items: center; padding: 0 8% 0 8%">#}
+{#                <div></div>#}
+{#                <div style="width: 100%;">#}
+{#                    <div class="loading-bar">#}
+{#                        <div class="loading-progress"></div>#}
+{#                    </div>#}
+{#                    <p style="text-align: center">dsfdfsfs</p>#}
+{#                </div>#}
+{#                <div style="height: 100%"></div>#}
+{#            </div>#}
+{#            <div style="text-align: center">#}
+{#                <a id="downloadBtn" class="btn">Download</a>#}
+{#                <a class="btn" href="/">Make one more</a>#}
+{#            </div>#}
+{#        </article>#}
+        <article class="timeline-entry" style="display: block">
+            <div>
+                <p style="font-size: 36px;font-weight: 600; margin: 0 8% 40px 8%">Do you wanna try?</p>
+                <div class="dropzone-wrapper">
+                    <div class="dropzone" style="margin: 0 auto 0 auto; display: flex; justify-content: space-between; align-items: center" onclick="$fileInput.click();">
+                        <div></div>
+                        <div id="dropZoneMessage" style="color: rgb(209, 197, 173);font-size: 28px; font-weight: 600; line-height: 1.2">
+                            Drop files or click!
+                        </div>
+                        <div style="height: 100%;"></div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <a id="makeBtn" class="btn">Make</a>
+                </div>
+            </div>
+        </article>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <input type="file" multiple id="fileInput" style="display: none">
+            <p>You can find the source code on our <a href="https://github.com/C4Ution/MMMaker">Github</a>.</p>
+        </div>
+    </footer>
+</main>
+<script type="text/javascript" src="{% static 'js/main.built.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'vendors/aws-sdk/aws-sdk.min.js' %}"></script>
+<script>
+    const bucketName = "mmmaker";
+    const bucketRegion = "ap-northeast-2";
+    const accessKeyId = "AKIAIKOLOCYLUYMSMG4Q";
+    const secretAccessKey = "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";
+    var $dropZone;
+    var $fileInput;
+    var $progressBar;
+    var $dropZoneMessage;
+    randoms = {{ randoms|safe }};
+    $(function () {
+        AWS.config.update({
+            region: bucketRegion,
+            accessKeyId: accessKeyId,
+            secretAccessKey: secretAccessKey
+        });
+
+        const s3 = new AWS.S3({
+            apiVersion: "2020-06-15",
+            params: { Bucket: bucketName },
+            httpOptions: {
+                xhrAsync: false
+            }
+        });
+
+        $dropZone = $('.dropzone');
+        $fileInput = $('#fileInput');
+        $progressBar = $('.loading-progress');
+        $dropZoneMessage = $('#dropZoneMessage');
+        $dropZone.on(" dragstart dragend dragover drag", function (e) {
+            e.preventDefault();
+        });
+        $dropZone.on({
+            dragenter: function(e) {
+                e.preventDefault();
+                $(this).css('background-color', 'rgba(0, 0, 0, 0.5)');
+            },
+            dragleave: function(e) {
+                e.preventDefault();
+                $(this).css('background-color', 'transparent');
+            },
+            drop: function(e) {
+                e.preventDefault();
+                $fileInput[0].files = e.originalEvent.dataTransfer.files;
+                $dropZone.css('background-color', 'transparent');
+                $fileInput.change();
+            }
+        });
+        $fileInput.change(function (e) {
+            $dropZone.html('sdfsdf')
+        });
+        $('#makeBtn').click(function () {
+            const files = $fileInput[0].files;
+            const fileCount = files.length;
+            if(fileCount < 1){
+                $dropZoneMessage.html("You gotta select files first!<br>Drop files or click!");
+                return
+            }
+            for(let i = 0;i < fileCount; i++){
+                const fileName = randoms[i] + '.' + files[i].name.split('.').pop();
+                var params = {
+                    Key: fileName,
+                    ContentType: files[i].type,
+                    Body: files[i],
+                    ACL: 'public-read'
+                };
+                s3.putObject(params, function (err, data) {
+                    if (err){
+                        console.log(err);
+                    } else {
+                        randoms[i] = fileName;
+                        $progressBar.css('width', (i + 1) * 10 + '%');
+                    }
+                });
+            }
+            console.log(randoms);
+        });
+    });
+</script>
+
+</body>
+</html>
