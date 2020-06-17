@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from app.memes.views import CreateTaskView, CheckTaskStatusView
+from conf.views import IndexView
+
 urlpatterns = [
+    path('', IndexView.as_view()),
+    path('tasks/create/', CreateTaskView.as_view(), name='create-task'),
+    path('tasks/<int:pk>/', CheckTaskStatusView.as_view(), name='check-task'),
     path('admin/', admin.site.urls),
 ]
