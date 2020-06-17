@@ -4,10 +4,11 @@ from celery import Celery
 
 from app.memes.models import Task
 from core.file_manager import downloader, uploader
-from core.pitch_controller import adjust_sounds, EXAMPLE_MUSIC
+from core.pitch_controller import adjust_sounds
 from core.video_merger import merge_videos
 from core.highlight_extractor import extract_highlights
 from core.video_effect_manager import apply_effects
+from core.music_manager import get_random_music
 
 
 app = Celery('task')
@@ -31,7 +32,7 @@ def make_meme_task(pk):
         meme.status = Task.STATUS_EXTRACT_HIGHLIGHT
         meme.save(update_fields=['status'])
 
-        videos = adjust_sounds(max_highlights, min_highlights, EXAMPLE_MUSIC)
+        videos = adjust_sounds(max_highlights, min_highlights, get_random_music())
         meme.status = Task.STATUS_ADJUST_SOUNDS
         meme.save(update_fields=['status'])
 
@@ -52,5 +53,6 @@ def make_meme_task(pk):
         meme.save(update_fields=['result_url', 'status'])
 
     except Exception as e:
+        print(e)
         meme.status = Task.STATUS_FAILED
         meme.save(update_fields=['status'])
