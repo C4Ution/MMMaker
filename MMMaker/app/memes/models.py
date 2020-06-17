@@ -6,16 +6,16 @@ class Task(models.Model):
     STATUS_QUEUED, STATUS_STARTED, STATUS_DOWNLOAD, STATUS_EXTRACT_HIGHLIGHT, STATUS_ADJUST_SOUNDS, STATUS_APPLY_EFFECTS, STATUS_MERGE_VIDEOS, STATUS_UPLOADER, STATUS_COMPLETE, STATUS_FAILED = 20, 30, 40, 50, 60, 70, 80, 90, 100, 0
 
     STATUS_CHOICES = (
-        (STATUS_QUEUED, 'queued on server'),
-        (STATUS_STARTED, 'start editing'),
-        (STATUS_DOWNLOAD, 'download resources'),
-        (STATUS_EXTRACT_HIGHLIGHT, 'extract highlights'),
-        (STATUS_ADJUST_SOUNDS, 'control pitches'),
-        (STATUS_APPLY_EFFECTS, 'add video effect'),
-        (STATUS_MERGE_VIDEOS, 'merge video clips'),
-        (STATUS_UPLOADER, 'upload videos'),
-        (STATUS_COMPLETE, 'completed'),
-        (STATUS_FAILED, 'error occurred'),
+        (STATUS_QUEUED, 'Queueing on server...'),
+        (STATUS_STARTED, 'Starting to edit...'),
+        (STATUS_DOWNLOAD, 'Downloading resources...'),
+        (STATUS_EXTRACT_HIGHLIGHT, 'Extracting highlights...'),
+        (STATUS_ADJUST_SOUNDS, 'Adjusting pitches...'),
+        (STATUS_APPLY_EFFECTS, 'Applying video effects...'),
+        (STATUS_MERGE_VIDEOS, 'Merging video clips...'),
+        (STATUS_UPLOADER, 'Uploading videos...'),
+        (STATUS_COMPLETE, 'All done!'),
+        (STATUS_FAILED, 'Error occurred'),
     )
     status = models.IntegerField(choices=STATUS_CHOICES, default=STATUS_QUEUED)
     created = models.DateTimeField(auto_now_add=True)
