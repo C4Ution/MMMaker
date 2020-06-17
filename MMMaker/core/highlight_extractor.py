@@ -30,13 +30,35 @@ def extract_highlights(file_paths):
 
         normalize_time = len(fourier_transform_wave) / video_clip.duration
 
-        argmax_frequency = np.argmax(fourier_transform_wave) / normalize_time + 0.5
-        argmin_frequency = np.argmin(abs(fourier_transform_wave)) / normalize_time + 0.5
+        argmax_frequency = np.argmax(fourier_transform_wave) / normalize_time
+        argmin_frequency = np.argmin(fourier_transform_wave) / normalize_time
 
         max_highlight_path = max_highlights.append(get_random_name('mp4'))
         min_highlight_path = min_highlights.append(get_random_name('mp4'))
 
-        video_clip.subclip(argmax_frequency - (HIGHLIGHT_LENGTH/2), argmax_frequency + (HIGHLIGHT_LENGTH/2)).write_videofile(max_highlight_path, codec='libx264', audio_codec='aac')
-        video_clip.subclip(argmin_frequency - (HIGHLIGHT_LENGTH/2), argmin_frequency + (HIGHLIGHT_LENGTH/2)).write_videofile(min_highlight_path, codec='libx264', audio_codec='aac')
+        start_max = argmax_frequency - (HIGHLIGHT_LENGTH/2)
+        end_max = argmax_frequency + (HIGHLIGHT_LENGTH/2)
+
+        if start_max < 0:
+            end_max -= start_max
+            start_max = 0
+        elif end_max > video_clip.duration:
+            start_max -= end_max - video_clip.duration
+            end_max = video_clip.duration
+
+        video_clip.subclip(start_max, end_max).write_videofile(max_highlights[-1], codec='libx264', audio_codec='aac')
+
+        start_min = argmin_frequency - (HIGHLIGHT_LENGTH/2)
+        end_min = argmin_frequency + (HIGHLIGHT_LENGTH/2)
+
+        if start_min < 0:
+            end_min -= start_min
+            start_min = 0
+        elif end_min > video_clip.duration:
+            start_min -= end_min - video_clip.duration
+            end_min = video_clip.duration
+
+        video_clip.subclip(start_min, end_min).write_videofile(min_highlights[-1], codec='libx264', audio_codec='aac')
+
         video_clip.close()
     return max_highlights, min_highlights
