@@ -17,37 +17,37 @@
     <h1 class="logo" style="z-index: 2"><a href="/">MMMaker</a></h1>
     <p class="intro type-primary">Create a meme with your adorable pet, baby, etc!<br>It is very easy with <a href="/">MMMaker.</a></p>
     <section class="timeline">
-{#        <article class="timeline-entry grid">#}
-{#            <h2 class="timeline-co type-primary"><a href="https://apple.com">Apple</a> <span class="timeline-time">2014–Present</span></h2 class="timeline-co">#}
-{#            <div class="timeline-description">#}
-{#                <p>My current role uniquely balances form and function. I’ve designed prototypes for executive review, built custom tooling for designers, and engineered web and native applications across various platforms. Most of my work has launched as interactive web experiences on <a href="https://apple.com">apple.com</a>.</p>#}
-{#                <p>I’ve also spearheaded collaborative efforts with designers while leading large teams of talented developers.</p>#}
-{#            </div>#}
-{#        </article>#}
-{#        <article class="timeline-entry" style="display: block">#}
-{#            <p style="font-size: 36px;font-weight: 600; margin: 0 8% 0 8%">It takes few minutes....</p>#}
-{#            <div style="display: flex; justify-content: space-between;align-items: center; padding: 0 8% 0 8%">#}
-{#                <div></div>#}
-{#                <div style="width: 100%;">#}
-{#                    <div class="loading-bar">#}
-{#                        <div class="loading-progress"></div>#}
-{#                    </div>#}
-{#                    <p style="text-align: center">dsfdfsfs</p>#}
-{#                </div>#}
-{#                <div style="height: 100%"></div>#}
-{#            </div>#}
-{#            <div style="text-align: center">#}
-{#                <a id="downloadBtn" class="btn">Download</a>#}
-{#                <a class="btn" href="/">Make one more</a>#}
-{#            </div>#}
-{#        </article>#}
-        <article class="timeline-entry" style="display: block">
+        {#        <article class="timeline-entry grid">#}
+        {#            <h2 class="timeline-co type-primary"><a href="https://apple.com">Apple</a> <span class="timeline-time">2014–Present</span></h2 class="timeline-co">#}
+        {#            <div class="timeline-description">#}
+        {#                <p>My current role uniquely balances form and function. I’ve designed prototypes for executive review, built custom tooling for designers, and engineered web and native applications across various platforms. Most of my work has launched as interactive web experiences on <a href="https://apple.com">apple.com</a>.</p>#}
+        {#                <p>I’ve also spearheaded collaborative efforts with designers while leading large teams of talented developers.</p>#}
+        {#            </div>#}
+        {#        </article>#}
+        <article class="timeline-entry" style="display: block" id="statusSection">
+            <p style="font-size: 36px;font-weight: 600; margin: 40px 8% 40px 8%">It takes few minutes....</p>
+            <div style="display: flex; justify-content: space-between;align-items: center; padding: 0 8% 0 8%">
+                <div></div>
+                <div style="width: 100%;">
+                    <div class="loading-bar">
+                        <div class="loading-progress"></div>
+                    </div>
+                    <p style="text-align: center" id="loadingText">dsfdfsfs</p>
+                </div>
+                <div style="height: 100%"></div>
+            </div>
+            <div style="text-align: center">
+                <a id="downloadBtn" class="btn">Download</a>
+                <a class="btn" href="/">retry</a>
+            </div>
+        </article>
+        <article class="timeline-entry" style="display: block" id="makeSection">
             <div>
                 <p style="font-size: 36px;font-weight: 600; margin: 0 8% 40px 8%">Do you wanna try?</p>
                 <div class="dropzone-wrapper">
-                    <div class="dropzone" style="margin: 0 auto 0 auto; display: flex; justify-content: space-between; align-items: center" onclick="$fileInput.click();">
+                    <div class="dropzone" style="margin: 0 auto 0 auto; display: flex; justify-content: space-between; align-items: center; overflow: hidden" onclick="$fileInput.click();">
                         <div></div>
-                        <div id="dropZoneMessage" style="color: rgb(209, 197, 173);font-size: 28px; font-weight: 600; line-height: 1.2">
+                        <div id="dropZoneMessage" style="color: rgb(209, 197, 173);font-size: 28px; font-weight: 600; line-height: 1.2; white-space: nowrap;">
                             Drop files or click!
                         </div>
                         <div style="height: 100%;"></div>
@@ -74,12 +74,42 @@
     const bucketRegion = "ap-northeast-2";
     const accessKeyId = "AKIAIKOLOCYLUYMSMG4Q";
     const secretAccessKey = "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";
-    var $dropZone;
-    var $fileInput;
-    var $progressBar;
-    var $dropZoneMessage;
+    $dropZone = null;
+    $fileInput = null;
+    $progressBar = null;
+    $dropZoneMessage = null;
+    $loadingText = null;
     randoms = {{ randoms|safe }};
+    resultUrl = null;
+    function downloadURI(uri, name){
+        var link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        link.click();
+    }
+    function checkStatus(id){
+        if(!is_completed && !error_occurred){
+            $.ajax({
+                url: "{% url 'check-task' pk='00000' %}".replace("00000", id),
+                success: function (data) {
+                    $loadingText.html(data.msg);
+                    $progressBar.css('width', data.status + '%');
+                    if(data.result_url){
+                        is_completed = true;
+                        resultUrl = data.result_url;
+                    }
+                    setTimeout(function () {
+                        checkStatus(id)
+                    }, 1000);
+                },
+                error: function () {
+                    error_occurred = true;
+                }
+            });
+        }
+    }
     $(function () {
+        $('#statusSection').hide();
         AWS.config.update({
             region: bucketRegion,
             accessKeyId: accessKeyId,
@@ -94,10 +124,13 @@
             }
         });
 
+        error_occurred = false;
+        is_completed = false;
         $dropZone = $('.dropzone');
         $fileInput = $('#fileInput');
         $progressBar = $('.loading-progress');
         $dropZoneMessage = $('#dropZoneMessage');
+        $loadingText = $('#loadingText');
         $dropZone.on(" dragstart dragend dragover drag", function (e) {
             e.preventDefault();
         });
@@ -118,33 +151,77 @@
             }
         });
         $fileInput.change(function (e) {
-            $dropZone.html('sdfsdf')
+            const files = $fileInput[0].files;
+            const fileCount = files.length;
+            let dropZoneMessage = "";
+
+            if(fileCount > 5){
+                $dropZoneMessage.html("You gotta select files less than 6!<br>Drop files or click!");
+                return
+            }
+
+            for(let i = 0; i < fileCount; i++){
+                dropZoneMessage += files[i].name + "<br>";
+            }
+            if(dropZoneMessage){
+                $dropZoneMessage.html(dropZoneMessage);
+            } else {
+                $dropZoneMessage.html("Drop files or click!");
+            }
         });
         $('#makeBtn').click(function () {
             const files = $fileInput[0].files;
             const fileCount = files.length;
+            let fileKeys = [];
+
             if(fileCount < 1){
                 $dropZoneMessage.html("You gotta select files first!<br>Drop files or click!");
                 return
             }
-            for(let i = 0;i < fileCount; i++){
-                const fileName = randoms[i] + '.' + files[i].name.split('.').pop();
-                var params = {
-                    Key: fileName,
-                    ContentType: files[i].type,
-                    Body: files[i],
-                    ACL: 'public-read'
-                };
-                s3.putObject(params, function (err, data) {
-                    if (err){
-                        console.log(err);
-                    } else {
-                        randoms[i] = fileName;
-                        $progressBar.css('width', (i + 1) * 10 + '%');
+            $('#makeSection').slideUp(1000);
+            $('#statusSection').slideDown(1000);
+
+            setTimeout(function () {
+                for(let i = 0; i < fileCount; i++){
+                    const fileName = randoms[i] + '.' + files[i].name.split('.').pop();
+                    var params = {
+                        Key: fileName,
+                        ContentType: files[i].type,
+                        Body: files[i],
+                        ACL: 'public-read'
+                    };
+                    s3.putObject(params, function (err, data) {
+                        if (err){
+                            error_occurred = true;
+                        } else {
+                            randoms[i] = fileName;
+                            $progressBar.css('width', Math.floor((i + 1) * 10/fileCount) + '%');
+                        }
+                    });
+                    fileKeys.push(fileName);
+                }
+                if(error_occurred){
+                    return;
+                }
+                $.ajax({
+                    url: "{% url 'create-task' %}",
+                    method: "POST",
+                    data: {
+                        "csrfmiddlewaretoken": "{{ csrf_token }}",
+                        "file": fileKeys
+                    },
+                    success: function (data) {
+                        $loadingText.html(data.msg);
+                        $progressBar.css('width', data.status + '%');
+                        console.log(data);
+                        checkStatus(data.id);
+                    },
+                    error: function () {
+                        error_occurred = true;
                     }
-                });
-            }
-            console.log(randoms);
+                })
+            }, 1000);
+
         });
     });
 </script>
