@@ -4,6 +4,7 @@ from django.db import transaction
 from django.shortcuts import get_object_or_404
 
 from app.memes.models import Task, TaskResource
+from tasks.task import make_meme
 
 
 class CreateTaskView(View):
@@ -22,7 +23,7 @@ class CreateTaskView(View):
                     TaskResource(task=task, access_key=file)
                 )
             TaskResource.objects.bulk_create(task_resources)
-
+        make_meme.delay(task.id)
         return JsonResponse({
             'id': task.id,
             'msg': task.get_status_display(),
