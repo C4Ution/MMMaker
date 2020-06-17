@@ -53,8 +53,8 @@ def edit_sounds(path, pitch, length):
     speed = HIGHLIGHT_LENGTH / length
     y, sr = librosa.load(path, sr=sr)
     write_wav(output_path, time_stretch(pitch_shift(y, sr, pitch), speed), sr)
+    print('test')
     return output_path
-
 
 if __name__ == '__main__':
     adjust_sounds(['MaxHighlight.mp4'], ['MinHighlight.mp4'], get_random_music())
