@@ -134,10 +134,10 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, '../static/')
 
 
-CUSTOM_DOMAIN = 'https://mmmaker.s3.ap-northeast-2.amazonaws.com/{}'
+CUSTOM_DOMAIN = 'https://mmmaker2.s3.ap-northeast-2.amazonaws.com/{}'
 AWS_REGION = 'ap-northeast-2'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
-AWS_STORAGE_BUCKET_NAME = 'mmmaker'
+AWS_STORAGE_BUCKET_NAME = 'mmmaker2'
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_HOST = 's3.{}.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
 AWS_ACCESS_KEY_ID = ''
@@ -174,11 +174,11 @@ S3DIRECT_DESTINATIONS = {
 
         # "bucket" [optional] Bucket if different from AWS_STORAGE_BUCKET_NAME
         #          String: bucket name
-        'bucket': 'mmmaker',
+        'bucket': 'mmmaker2',
 
         # "endpoint" [optional] Endpoint if different from AWS_S3_ENDPOINT_URL
         #            String: endpoint URL
-        'endpoint': 'http://mmmaker.s3-website.ap-northeast-2.amazonaws.com',
+        'endpoint': 'http://mmmaker2.s3-website.ap-northeast-2.amazonaws.com',
 
         # "region" [optional] Region if different from AWS_S3_REGION_NAME
         #          String: region name
