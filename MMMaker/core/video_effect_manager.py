@@ -89,16 +89,16 @@ def _painting(file_path):
     return file_path
 
 
-def _video_grid(video):
-    canvas_width = 1280
-    canvas_height = 720
-    vid_width = canvas_width/3
-    vid_height = (vid_width/canvas_width) * canvas_height
-
-    x = 0
-    y = 0
-
-    while y < canvas_height:
+# def _video_grid(video):
+#     canvas_width = 1280
+#     canvas_height = 720
+#     vid_width = canvas_width/3
+#     vid_height = (vid_width/canvas_width) * canvas_height
+#
+#     x = 0
+#     y = 0
+#
+#     while y < canvas_height:
 
 
 def _video_zoompan(file_path):
