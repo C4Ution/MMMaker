@@ -89,6 +89,18 @@ def _painting(file_path):
     return file_path
 
 
+def _video_grid(video):
+    canvas_width = 1280
+    canvas_height = 720
+    vid_width = canvas_width/3
+    vid_height = (vid_width/canvas_width) * canvas_height
+
+    x = 0
+    y = 0
+
+    while y < canvas_height:
+
+
 def _video_zoompan(file_path):
     video = Clip(file_path)
     video.zoompan([0, 0, '100%', '100%'], [100, 100, '50%', '50%'], start=0, end=5)
@@ -96,16 +108,28 @@ def _video_zoompan(file_path):
     video.save(file_path)
     return file_path
 
+
 def _video_spin(file_path):
     video = Clip(file_path)
     video.spin(50)
     file_path = get_random_name('mp4')
     video.save(file_path)
     return file_path
+
+
+def _video_spin_zoompan(file_path):
+    video = Clip(file_path)
+    video.spin(50)
+    video.zoompan([0, 0, '100%', '100%'], [100, 100, '50%', '50%'], start=0, end=5)
+    file_path = get_random_name('mp4')
+    video.save(file_path)
+    return file_path
+
+
 def apply_effects(file_paths):
     effects = [
         _stay, _flip_x, _flip_y, _black_white, _colorx, _mask_color, _rotate_90, _rotate_270, _invert_colors, _painting
-        _video_zoompan,
+        _video_zoompan, _video_spin, _video_spin_zoompan,
     ]
 
     new_file_paths = []
