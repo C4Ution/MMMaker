@@ -59,35 +59,42 @@ def add_background_audio(audio_clip):
     :return: 배경음 삽입된 오디오 클립
     """
 
-    if get_selected_music() == "AIRPLANE_MUSIC":
+    if get_selected_music() == 'AIRPLANE_MUSIC':
         # Access audio file
         back_audio = AudioFileClip(settings.BASE_DIR + '/core/back_audios/' + get_selected_music() + '.wav')
 
         # New audio file
         new_audio_clip = CompositeAudioClip([audio_clip.fx(volumex, 7), back_audio.fx(volumex, 1)])
-    else:
+    elif get_selected_music() == 'BABY_SHARK_MUSIC':
         # Access audio file
         back_audio = AudioFileClip(settings.BASE_DIR + '/core/back_audios/' + get_selected_music() + '.wav')
         back_audio2 = AudioFileClip(settings.BASE_DIR + '/core/back_audios/BABY_SHARK_BEAT.wav')
 
         # New audio file
         new_audio_clip = CompositeAudioClip([audio_clip.fx(volumex, 7), back_audio.fx(volumex, 1), back_audio2.set_start(7).fx(volumex, 1)])
+    else:
+        # Access audio file
+        back_audio = AudioFileClip(settings.BASE_DIR + '/core/back_audios/' + get_selected_music() + '.wav')
+
+        # New audio file
+        new_audio_clip = CompositeAudioClip(
+            [audio_clip.fx(volumex, 6), back_audio.fx(volumex, 1.5)])
 
     return new_audio_clip
 
 
 # if __name__ == '__main__':
-#     video_clip = VideoFileClip('back_audios/babysharkbeat.mp4')
+#     video_clip = VideoFileClip('back_audios/GGANG.mp4')
 #
 #     # extract video subclip
-#     sub_video = video_clip.subclip(23, 32)
-#     sub_video.write_videofile('back_audios/subbabysharkbeat.mp4', codec='libx264', audio_codec='aac')
+#     sub_video = video_clip.subclip(5, 17)
+#     sub_video.write_videofile('back_audios/subggang.mp4', codec='libx264', audio_codec='aac')
 #
-#     video_clip = VideoFileClip('back_audios/subbabysharkbeat.mp4')
+#     video_clip = VideoFileClip('back_audios/subggang.mp4')
 #
-#     new_video = video_clip.fx(vfx.speedx, final_duration=9)
+#     new_video = video_clip.fx(vfx.speedx, final_duration=12)
 #     # new_video.write_videofile('back_audios/subspeedupvideoplayback.mp4', codec='libx264', audio_codec='aac')
 #
 #     audio_clip = new_video.audio
-#     audio_clip.write_audiofile('back_audios/BABY_SHARK_BEAT.wav')
+#     audio_clip.write_audiofile('back_audios/GGANG.wav')
 

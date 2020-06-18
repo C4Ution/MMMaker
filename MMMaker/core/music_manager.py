@@ -342,16 +342,263 @@ BABY_SHARK_MUSIC = [
     },
 ]
 
+# 깡
+# 미 미파미미 미미파미도라미 미 미파미 미 미미미미도라도 미 미파미미 미미파미도라미 미미파미미 미미미 미도라도
+GGANG = [
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -4.0,  # 파
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.1,
+        'is_silence': True,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -9.0,  # 도
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -0.0,  # 라
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -4.0,  # 파
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.05,
+        'is_silence': True,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -9.0,  # 도
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -0.0,  # 라
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -4.0,  # 파
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.05,
+        'is_silence': True,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -9.0,  # 도
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -0.0,  # 라
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -4.0,  # 파
+        'length': 0.1,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': 0.0,  # 공백
+        'length': 0.05,
+        'is_silence': True,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+    {
+        'pitch': -5.0,  # 미
+        'length': 0.05,
+        'is_silence': False,
+    },
+]
+
 
 def get_random_music():
     musics = [
         AIRPLANE_MUSIC,
         BABY_SHARK_MUSIC,
+        GGANG
     ]
 
     music_num = random.randint(0, len(musics)-1)
-
-    #music_num = 1
 
     global selected_music
 
@@ -359,6 +606,8 @@ def get_random_music():
         selected_music = 'AIRPLANE_MUSIC'
     elif music_num == 1:
         selected_music = 'BABY_SHARK_MUSIC'
+    elif music_num == 2:
+        selected_music = 'GGANG'
 
     return musics[music_num]
 
