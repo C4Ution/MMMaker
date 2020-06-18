@@ -26,8 +26,8 @@ def extract_highlights(file_paths):
 
         stereo_channel_wave = source_wave[1].T[1]
         normalize_wave = [(ele / 2 ** 8.) * 2 - 1 for ele in stereo_channel_wave]  # this is 8-bit track, now normalized on [-1,1)
-        fourier_transform_wave = fft(normalize_wave)  # calculate fourier transform (complex numbers list)
-
+        # fourier_transform_wave = fft(normalize_wave)  # calculate fourier transform (complex numbers list)
+        fourier_transform_wave = normalize_wave
         normalize_time = len(fourier_transform_wave) / video_clip.duration
 
         argmax_frequency = np.argmax(fourier_transform_wave) / normalize_time
@@ -61,4 +61,5 @@ def extract_highlights(file_paths):
         video_clip.subclip(start_min, end_min).write_videofile(min_highlights[-1], codec='libx264', audio_codec='aac')
 
         video_clip.close()
+
     return max_highlights, min_highlights
