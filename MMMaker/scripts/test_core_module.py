@@ -6,7 +6,5 @@ from core.video_effect_manager import apply_effects
 
 
 def run():
-    max_highlights, min_highlights = extract_highlights(['/home/simhongsub/dev/workspace/MMMaker/MMMaker/core/SourceVideo.mp4'])
-    videos = adjust_sounds(max_highlights, min_highlights, get_random_music())
-    videos = apply_effects(videos)
-    print(merge_videos(videos))
+
+    print(extract_highlights(['/Users/myeongsegyo/Workspace/MMMaker/MMMaker/core/source4.mp4']))
