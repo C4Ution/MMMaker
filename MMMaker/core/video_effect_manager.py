@@ -142,10 +142,27 @@ def _video_mixer_color(file_path):
     return file_path
 
 
+def _video_fadein(file_path):
+    video = Clip(file_path)
+    video.fadein(0.3)
+    file_path = get_random_name('mp4')
+    video.save(file_path)
+    return file_path
+
+
+def _video_fadeout(file_path):
+    video = Clip(file_path)
+    video.fadeout(0.3)
+    file_path = get_random_name('mp4')
+    video.save(file_path)
+    return file_path
+
+
 def apply_effects(file_paths):
     effects = [
-        _stay, _flip_x, _flip_y, _black_white, _colorx, _mask_color, _rotate_90, _rotate_270, _invert_colors, _painting
-        _video_zoompan, _video_spin, _video_spin_zoompan, _video_mirror, _video_mixer_color
+        _stay, _flip_x, _flip_y, _black_white, _colorx, _mask_color, _rotate_90, _rotate_270, _invert_colors, _painting,
+        _video_zoompan, _video_spin, _video_spin_zoompan, _video_mirror, _video_mixer_color, _video_fadein, _video_fadeout,
+
     ]
 
     new_file_paths = []
