@@ -331,12 +331,12 @@ BABY_SHARK_MUSIC = [
     },
 
     {
-        'pitch': -4.0,  # 파
+        'pitch': -3.0,  # 파
         'length': 0.1,
         'is_silence': False,
     },
     {
-        'pitch': -4.0,  # 파
+        'pitch': -3.0,  # 파
         'length': 0.05,
         'is_silence': False,
     },
@@ -350,6 +350,8 @@ def get_random_music():
     ]
 
     music_num = random.randint(0, len(musics)-1)
+
+    #music_num = 1
 
     global selected_music
 
