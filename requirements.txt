@@ -53,7 +53,7 @@ mccabe==0.6.1
 moviepy==1.0.3
 mysqlclient==1.4.6
 numba==0.49.1
-numpy==1.18.4
+numpy==1.22.0
 pbr==5.4.5
 pep8-naming==0.9.1
 Pillow==7.1.2
